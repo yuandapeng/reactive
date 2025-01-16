@@ -1,9 +1,9 @@
-import { handles } from "./handles.js";
-import { isObject } from "./utils.js";
+import { handles } from "./handles";
+import { isObject } from "./utils";
 
 const targetMap = new WeakMap();
 
-export function reactive(target) {
+export function reactive(target: any) {
   if (!isObject(target)) {
     console.warn("[reactive warn]: target must be an Object"); // 不是一个对象直接返回
     return;

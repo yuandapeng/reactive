@@ -1,8 +1,7 @@
-import { track, trigger } from "./effect.js";
-import { TriggerOpTypes, TrackOpTypes } from "./operations.js";
-import { reactive } from "./reactive.js";
-import { hasChanged, isObject } from "./utils.js";
-
+import { track, trigger } from "./effect";
+import { TriggerOpTypes, TrackOpTypes } from "./operations";
+import { reactive } from "./reactive";
+import { hasChanged, isObject } from "./utils";
 export const ref = (value) => {
   let wrappedValue = isObject(value) ? reactive(value) : value;
   return {
