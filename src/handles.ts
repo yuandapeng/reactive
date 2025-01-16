@@ -1,7 +1,7 @@
-import { track, trigger, resumeTracking, pauseTracking } from "./effect.js";
-import { hasChanged, isObject } from "./utils.js";
-import { reactive } from "./reactive.js";
-import { TrackOpTypes, TriggerOpTypes } from "./operations.js";
+import { track, trigger, resumeTracking, pauseTracking } from "./effect";
+import { hasChanged, isObject } from "./utils";
+import { reactive } from "./reactive";
+import { TrackOpTypes, TriggerOpTypes } from "./operations";
 
 const RAW_OBJ_KEY = Symbol("RAW_OBJ_KEY");
 
@@ -20,7 +20,8 @@ const arrayInstrumentations = {};
 });
 
 ["push", "pop", "shift", "unshift", "splice"].forEach((key) => {
-  arrayInstrumentations[key] = function (...args) {  // 暂停收集依赖
+  arrayInstrumentations[key] = function (...args) {
+    // 暂停收集依赖
     pauseTracking();
     const res = Array.prototype[key].apply(this, args);
     resumeTracking();
@@ -65,12 +66,12 @@ function set(target, key, value, receiver) {
   if (hasChanged(oldValue, value) || type === TriggerOpTypes.ADD) {
     trigger(target, type, key); // 派发更新
 
-    if (oldLen !== newLen && Array.isArray(target)) {
+    if (Array.isArray(target) && oldLen !== newLen) {
       // 通过隐式修改length 触发修改length 的监听
       if (key !== "length") {
         trigger(target, TriggerOpTypes.SET, "length");
       } else {
-        for (let i = newLen; i < oldLen; i++) {
+        for (let i = newLen!; i < oldLen!; i++) {
           // 数组长度变小触发Delete 操作
           trigger(target, TriggerOpTypes.DELETE, i.toString());
         }
