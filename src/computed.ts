@@ -17,10 +17,8 @@ export function computed(options) {
   let dirty = true;
 
   const effectFn = effect(() => {
-    if (dirty) {
       value = getter();
       dirty = false;
-    }
   }, { lazy: true });
 
   return {
