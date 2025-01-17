@@ -41,6 +41,9 @@ module.exports = function (env, argv) {
   const entry = "./src/index.ts";
 
   const resolve = {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    },
     extensions: [".ts", ".tsx", ".js", ".json"], // 添加更多的扩展
   };
 
