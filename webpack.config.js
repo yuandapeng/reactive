@@ -14,22 +14,27 @@ module.exports = function (env, argv) {
     keep: isProd ? "index.development.js" : "index.production.js",
   };
 
-  const module = {
-    rules: [
+  const tsLoader = {
+    test: /\.ts$/,
+    exclude: /node_modules/,
+    use: [
       {
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env", "@babel/preset-typescript"],
+        loader: "swc-loader",
+        options: {
+          jsc: {
+            parser: {
+              syntax: "typescript",
+              tsx: false,
             },
+            target: "es2015",
           },
-          "ts-loader",
-        ],
+        },
       },
     ],
+  };
+
+  const module = {
+    rules: [tsLoader],
   };
 
   const entry = "./src/index.ts";
