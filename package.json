@@ -1,8 +1,8 @@
 {
   "name": "reactive",
   "version": "1.0.0",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.production.js",
+  "module": "dist/esm/index.production.js",
   "types": "dist/types/index.d.ts",
   "directories": {
     "doc": "docs"
@@ -15,7 +15,8 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --config webpack.config.js --mode production",
+    "build:dev": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
