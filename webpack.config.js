@@ -30,7 +30,8 @@ module.exports = function (env, argv) {
           },
         },
       },
-    ],
+      'ts-loader'
+    ], 
   };
 
   const module = {
