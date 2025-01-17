@@ -20,7 +20,7 @@ const targetMap = new WeakMap<
 
 const ITERATE_KEY = Symbol("iterate");
 
-export const effect = (fn) => {
+export const effect = (fn, options = { lazy: false }) => {
   const effectFn: EffectFn | null = () => {
     activeEffect = effectFn;
     try {
@@ -31,7 +31,10 @@ export const effect = (fn) => {
     }
   };
   effectFn.deps = [];
-  effectFn();
+  if (!options.lazy) {
+    effectFn();
+  }
+  return effectFn; // Return the effect function
 };
 
 export function cleanup(effectFn: EffectFn) {
