@@ -3,8 +3,9 @@ import { TriggerOpTypes, TrackOpTypes } from "./operations";
 import { reactive } from "./reactive";
 import { hasChanged, isObject } from "./utils";
 
-export interface Ref<T> {
-  value: T;
+export interface Ref<T = any, S = T> {
+  get value(): T;
+  set value(_: S);
 }
 
 export const ref = <T = any>(value: T): Ref<T> => {

@@ -27,6 +27,7 @@
     "@swc/core": "^1.10.7",
     "@types/node": "^22.10.7",
     "swc-loader": "^0.2.6",
+    "ts-loader": "^9.5.2",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1"
   }
